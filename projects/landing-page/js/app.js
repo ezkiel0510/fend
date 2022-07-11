@@ -49,6 +49,9 @@ function findLink(sec) {
   }
   return null;
 }
+function scrollToSection(sectionId) {
+  document.getElementById(sectionId).scrollIntoView();
+}
 
 /**
  * End Helper Functions
@@ -63,8 +66,11 @@ document.addEventListener("DOMContentLoaded", function createMenu() {
     const item = document.createElement("li");
     const link = document.createElement("a");
     link.textContent = `${section.getAttribute("data-nav")}`;
-    link.className = `menu__link ${section.getAttribute("id")}`;
+    link.className = `menu__link ${section.id}`;
     item.appendChild(link);
+    item.addEventListener("click", function () {
+      scrollToSection(section.id);
+    });
     navMenu.appendChild(item);
   }
 });
@@ -74,13 +80,11 @@ function makeActive() {
   for (const section of sections) {
     // You can play with the values in the "if" condition to further make it more accurate.
     if (isSectionInViewport(section)) {
-      // console.log(`${section.getAttribute("data-nav")} is in viewport`);
       section.classList.add("active");
       const menuItem = findLink(section);
       menuItem.classList.add("active");
     } else {
       // Remove active state from other section and corresponding Nav link.
-      // console.log(`${section.getAttribute("data-nav")} isn't in viewport`);
       section.classList.remove("active");
       const menuItem = findLink(section);
       menuItem.classList.remove("active");
@@ -93,22 +97,7 @@ document.addEventListener("scroll", function () {
   makeActive();
 });
 
-// Scroll to anchor ID using scrollTO event
-
 /**
  * End Main Functions
- * Begin Events
  *
  */
-document.addEventListener("click", function () {
-  for (const section of sections) {
-    console.log(
-      `${section.getAttribute("id")}`,
-      section.getBoundingClientRect()
-    );
-  }
-});
-
-// Scroll to section on link click
-
-// Set sections as active
