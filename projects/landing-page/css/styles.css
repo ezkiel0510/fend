@@ -80,7 +80,7 @@ section {
 
 .navbar__menu .menu__link {
   display: block;
-  padding: 1em;
+  padding: 0.5em;
   font-weight: bold;
   text-decoration: none;
   color: #000;
@@ -96,6 +96,52 @@ section {
   background: #333;
   color: #fff;
   transition: ease 0.3s all;
+}
+
+/* Medium Screens */
+@media (min-width: 600px) and (max-width: 900px) {
+  .navbar__menu .menu__link {
+    display: block;
+    padding: 1em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000;
+  }
+  
+  .navbar__menu .menu__link:hover {
+    background: #333;
+    color: #fff;
+    transition: ease 0.3s all;
+  }
+  
+  .navbar__menu .menu__link.active {
+    background: #333;
+    color: #fff;
+    transition: ease 0.3s all;
+  }
+}
+
+/* Large Screens */
+@media (min-width: 901px) {
+  .navbar__menu .menu__link {
+    display: block;
+    padding: 2em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000;
+  }
+  
+  .navbar__menu .menu__link:hover {
+    background: #333;
+    color: #fff;
+    transition: ease 0.3s all;
+  }
+  
+  .navbar__menu .menu__link.active {
+    background: #333;
+    color: #fff;
+    transition: ease 0.3s all;
+  }
 }
 
 /* Header Styles */
