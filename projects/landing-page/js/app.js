@@ -31,8 +31,8 @@ const sections = document.getElementsByTagName("section");
  */
 
 // Check if the section is in viewport
-function isSectionInViewport(sec) {
-  const box = sec.getBoundingClientRect();
+function isSectionInViewport(section) {
+  const box = section.getBoundingClientRect();
   return (
     box.top >= 0 &&
     box.left >= 0 &&
@@ -41,6 +41,7 @@ function isSectionInViewport(sec) {
     box.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
 }
+
 // Check if the menu item have a same class as current section in viewport
 function findLink(sec) {
   const secId = sec.getAttribute("id");
@@ -61,8 +62,8 @@ function scrollToSection(sectionId) {
 // Add class 'active' to section when near top of viewport
 function makeActive() {
   for (const section of sections) {
-    // You can play with the values in the "if" condition to further make it more accurate.
     if (isSectionInViewport(section)) {
+      // Add active state to section & corresponding Nav link.
       section.classList.add("active");
       const menuItem = findLink(section);
       menuItem.classList.add("active");
