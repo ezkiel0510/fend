@@ -29,6 +29,8 @@ const sections = document.getElementsByTagName("section");
  * Start Helper Functions
  *
  */
+
+// Check if the section is in viewport
 function isSectionInViewport(sec) {
   const box = sec.getBoundingClientRect();
   return (
@@ -39,6 +41,7 @@ function isSectionInViewport(sec) {
     box.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
 }
+// Check if the menu item have a same class as current section in viewport
 function findLink(sec) {
   const secId = sec.getAttribute("id");
   const navLinks = document.getElementsByClassName("menu__link");
@@ -49,8 +52,27 @@ function findLink(sec) {
   }
   return null;
 }
+
+// Scroll to section
 function scrollToSection(sectionId) {
   document.getElementById(sectionId).scrollIntoView();
+}
+
+// Add class 'active' to section when near top of viewport
+function makeActive() {
+  for (const section of sections) {
+    // You can play with the values in the "if" condition to further make it more accurate.
+    if (isSectionInViewport(section)) {
+      section.classList.add("active");
+      const menuItem = findLink(section);
+      menuItem.classList.add("active");
+    } else {
+      // Remove active state from other section and corresponding Nav link.
+      section.classList.remove("active");
+      const menuItem = findLink(section);
+      menuItem.classList.remove("active");
+    }
+  }
 }
 
 /**
@@ -74,23 +96,6 @@ document.addEventListener("DOMContentLoaded", function createMenu() {
     navMenu.appendChild(item);
   }
 });
-
-// Add class 'active' to section when near top of viewport
-function makeActive() {
-  for (const section of sections) {
-    // You can play with the values in the "if" condition to further make it more accurate.
-    if (isSectionInViewport(section)) {
-      section.classList.add("active");
-      const menuItem = findLink(section);
-      menuItem.classList.add("active");
-    } else {
-      // Remove active state from other section and corresponding Nav link.
-      section.classList.remove("active");
-      const menuItem = findLink(section);
-      menuItem.classList.remove("active");
-    }
-  }
-}
 
 // Make sections active
 document.addEventListener("scroll", function () {
